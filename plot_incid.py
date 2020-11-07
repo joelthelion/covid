@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 
 if __name__ == '__main__':
-    df = pd.read_csv("data/19a91d64-3cd3-42fc-9943-d635491a4d76", sep=";")
+    df = pd.read_csv("data/19a91d64-3cd3-42fc-9943-d635491a4d76", sep=";", dtype={"dep":"string"})
     df = df[df.cl_age90 == 0]
     france_met = df[df.dep.str.len() <= 2].groupby("jour", as_index=False).sum()
     france_met["dep"] = "fr_met"

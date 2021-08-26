@@ -2,6 +2,7 @@
 
 import pandas as pd
 import plotly.express as px
+from schweiz import get_schweiz, to_fr
 
 if __name__ == '__main__':
     df = pd.read_csv("data/19a91d64-3cd3-42fc-9943-d635491a4d76", sep=";", dtype={"dep":"string"})
@@ -10,6 +11,9 @@ if __name__ == '__main__':
     france_met["dep"] = "fr_met"
     df2 = pd.concat((france_met, df[df.dep.isin(("01","69"))]), sort=False)
     df2["incid"] = df2.P / df2["pop"] * 100000
+    df_ch = to_fr(get_schweiz())
+    df_ch = df_ch[df_ch.dep.isin(["VD", "CH"])]
+    df2 = pd.concat([df2, df_ch])
     plot = px.line(df2, x="jour", y="incid", color="dep", facet_row="dep",
             labels = {"jour":"Date", "incid":"Taux d'incidence / 100 000",
                 "dep":"Département"})

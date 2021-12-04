@@ -39,7 +39,7 @@ def plot(df):
     )
     plot.update_layout(title="Taux d'incidence du Covid-19")
     plot.update_xaxes(range=["2021-03-01", datetime.now()])
-    plot.update_yaxes(range=[0, 100])
+    plot.update_yaxes(range=[0, 200])
     plot.write_html("/home/joel/public_html/covid_inc.html")
 
 

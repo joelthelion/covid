@@ -20,6 +20,7 @@ def load():
     df_ch = to_fr(get_schweiz())
     df_ch = df_ch[df_ch.dep.isin(["VD", "CH"])]
     df2 = pd.concat([df_ch, df2])
+    df2["incid"] *= 7 # per-week incidence
     return df2
 
 

@@ -4,6 +4,7 @@ from datetime import datetime
 import pandas as pd
 import plotly.express as px
 from schweiz import get_schweiz, to_fr
+from math import log, exp
 
 
 def load():
@@ -39,7 +40,10 @@ def plot(df):
     )
     plot.update_layout(title="Taux d'incidence du Covid-19")
     plot.update_xaxes(range=["2021-03-01", datetime.now()])
-    plot.update_yaxes(range=[0, 200])
+    # Non-linear rounding
+    n = 0.3
+    max_y = exp((log(df.incid.max())//n+1)*n)
+    plot.update_yaxes(range=[0, max_y])
     plot.write_html("/home/joel/public_html/covid_inc.html")
 
 
